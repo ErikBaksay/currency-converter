@@ -6,11 +6,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ConverterComponent } from './components/converter/converter.component';
+import { MainPageComponent } from './components/main-page/main-page.component';
+import { ChartComponent } from './components/chart/chart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ConverterComponent
+    ConverterComponent,
+    MainPageComponent,
+    ChartComponent
   ],
   imports: [
     BrowserModule,
