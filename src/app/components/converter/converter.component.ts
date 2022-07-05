@@ -1,3 +1,4 @@
+import { ChartDataService } from './../../services/chart-data.service';
 import { ExchangeRatesService } from './../../services/exchange-rates.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -11,12 +12,11 @@ export class ConverterComponent implements OnInit {
   currencies : any[][] = []
   conversionValue:any;
   amount = 1
-  fromCurrency = 1 
-  toCurrency = 2 
+  fromCurrency = 0
+  toCurrency = 1
 
-
-  constructor(private exchangesService:ExchangeRatesService){
-  }
+  constructor(private exchangesService:ExchangeRatesService,
+              private chartDataService : ChartDataService){}
 
   convert(){
     if (this.amount == null){
@@ -39,6 +39,7 @@ export class ConverterComponent implements OnInit {
     } else {
       this.conversionValue = this.amount;
     }
+    this.chartDataService.currencySelectionChanged(from,to)
   }
   
   switchCurrencies(){
