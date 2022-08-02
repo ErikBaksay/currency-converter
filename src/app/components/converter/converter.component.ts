@@ -18,6 +18,23 @@ export class ConverterComponent implements OnInit {
   constructor(private exchangesService:ExchangeRatesService,
               private chartDataService : ChartDataService){}
 
+  ngOnInit(): void {
+    this.exchangesService.getCurrencies()
+      .subscribe(response => {
+        this.currenciesResponse = response;
+        this.currenciesResponse = this.currenciesResponse.symbols
+        let i = 0
+        for (let key in this.currenciesResponse){
+          let currency = this.currenciesResponse[key].code;
+          this.currencies.push([currency,i])
+          i++
+        }
+        this.convert() 
+      })
+      console.log(this.currencies);
+      
+  }
+
   convert(){
     if (this.amount == null){
       this.amount = 0
@@ -47,18 +64,4 @@ export class ConverterComponent implements OnInit {
     this.convert()
   }
   
-  ngOnInit(): void {
-    this.exchangesService.getCurrencies()
-      .subscribe(response => {
-        this.currenciesResponse = response;
-        this.currenciesResponse = this.currenciesResponse.symbols
-        let i = 0
-        for (let key in this.currenciesResponse){
-          let currency = this.currenciesResponse[key].code;
-          this.currencies.push([currency,i])
-          i++
-        }
-        this.convert() 
-      })
-  }
 }
