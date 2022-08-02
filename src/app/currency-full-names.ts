@@ -232,34 +232,9 @@ export const currencyFullNames : CurrencyFull[] = [
         symbol : 'Rp',
     },
     {
-        code : 'IRR',
-        fullName : 'Iran Rial',
-        symbol : '﷼',
-    },
-    {
-        code : 'IMP',
-        fullName : 'Isle of Man Pound',
-        symbol : '£',
-    },
-    {
-        code : 'ILS',
-        fullName : 'Israel Shekel',
-        symbol : '₪',
-    },
-    {
-        code : 'JMD',
-        fullName : 'Jamaica Dollar',
-        symbol : 'J$',
-    },
-    {
         code : 'JPY',
         fullName : 'Japan Yen',
         symbol : '¥',
-    },
-    {
-        code : 'JEP',
-        fullName : 'Jersey Pound',
-        symbol : '£',
     },
     {
         code : 'IRR',
@@ -280,11 +255,6 @@ export const currencyFullNames : CurrencyFull[] = [
         code : 'JMD',
         fullName : 'Jamaica Dollar',
         symbol : 'J$',
-    },
-    {
-        code : 'JPY',
-        fullName : 'Japan Yen',
-        symbol : '¥',
     },
     {
         code : 'JEP',
@@ -299,11 +269,6 @@ export const currencyFullNames : CurrencyFull[] = [
     {
         code : 'KPW',
         fullName : 'Korea (North) Won',
-        symbol : '₩',
-    },
-    {
-        code : 'KRW',
-        fullName : 'Korea (South) Won',
         symbol : '₩',
     },
     {
