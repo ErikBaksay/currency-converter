@@ -81,6 +81,7 @@ export class ChartComponent implements OnInit {
   down = (ctx : any, value : any) => ctx.p0.parsed.y > ctx.p1.parsed.y ? value : undefined;
 
   createChart(){
+    Chart.defaults.color = "#333";
     this.chart = new Chart('chart', {
       type: 'line',
       data: {
@@ -113,5 +114,5 @@ export class ChartComponent implements OnInit {
       
     });
   }
-
+  
 }
