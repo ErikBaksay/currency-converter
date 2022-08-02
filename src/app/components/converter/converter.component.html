@@ -1,18 +1,18 @@
 <div id="converter-container">
     
-    <div id="from-section">
-        <select [(ngModel)]="fromCurrency" (change)="convert()">
-            <option *ngFor="let currency of currencies" value="{{currency[1]}}">{{currency[0]}}</option>
-        </select>
-        <input type="number" [(ngModel)]='amount' (input)="convert()">
+    <select id="fromCurrency" [(ngModel)]="fromCurrency" (change)="convert()">
+        <option *ngFor="let currency of currencies" value="{{currency.id}}">{{currency.currency.fullName}} - {{currency.currency.code}}</option>
+    </select>
+    <input id="fromValue" type="number" [(ngModel)]='amount' (input)="convert()">
+
+    <select id="toCurrency" [(ngModel)]="toCurrency" (change)="convert()">
+        <option *ngFor="let currency of currencies" value="{{currency.id}}">{{currency.currency.fullName}} - {{currency.currency.code}}</option>
+    </select>
+    <div id="result-section">
+        <p>{{conversionValue}} {{toCurrencySymbol}}</p>
     </div>
-    
-    <div id="to-section">
-        <select [(ngModel)]="toCurrency" (change)="convert()">
-            <option *ngFor="let currency of currencies" value="{{currency[1]}}">{{currency[0]}}</option>
-        </select>
-        <div id="result-section">
-            <p>{{conversionValue}}</p>
+    <div id="switch-container">
+        <div id="switch">
             <span class="material-symbols-outlined" (click)="switchCurrencies()">
                 swap_vert
             </span>

@@ -36,8 +36,6 @@ export class ChartComponent implements OnInit {
     })
    }
 
-   
-
   ngOnInit(): void {    
     this.constructChart()
   }
@@ -79,6 +77,9 @@ export class ChartComponent implements OnInit {
     })
   }
 
+  up = (ctx : any, value : any) => ctx.p0.parsed.y < ctx.p1.parsed.y ? value : undefined;
+  down = (ctx : any, value : any) => ctx.p0.parsed.y > ctx.p1.parsed.y ? value : undefined;
+
   createChart(){
     this.chart = new Chart('chart', {
       type: 'line',
@@ -86,9 +87,30 @@ export class ChartComponent implements OnInit {
         labels: this.labels,
         datasets: [{
             data: this.data,
+            tension: 0.2,
+            segment: {
+              borderColor: ctx => this.up(ctx,'rgba(75,192,192,1)') || this.down(ctx,'rgba(255,26,104,1)'),
+            }
         }]
       },
-      options:{plugins:{legend:{display:false}}}
+      options:{
+        plugins:{
+          legend:{
+            display:false
+          },
+          tooltip:{
+            enabled: true
+          }
+        },
+        elements:{
+          point:{
+            radius:1,
+            backgroundColor: 'transparent',
+            borderColor: 'lightGray'
+          }
+        },
+      },
+      
     });
   }
 

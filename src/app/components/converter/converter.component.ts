@@ -1,3 +1,5 @@
+import { CurrencyFull } from './../../interfaces/currency-full';
+import { currencyFullNames } from './../../currency-full-names';
 import { ChartDataService } from './../../services/chart-data.service';
 import { ExchangeRatesService } from './../../services/exchange-rates.service';
 import { Component, OnInit } from '@angular/core';
@@ -9,16 +11,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConverterComponent implements OnInit {
   currenciesResponse:any;
-  currencies : any[][] = []
+  currencies : any = []
   conversionValue:any;
   amount = 1
   fromCurrency = 0
   toCurrency = 1
+  supportedCurrencies : CurrencyFull[] = []
+  supportedCurrenciesCodes : string[] = []
+  toCurrencySymbol = ''
 
   constructor(private exchangesService:ExchangeRatesService,
               private chartDataService : ChartDataService){}
 
   ngOnInit(): void {
+    currencyFullNames.forEach((currency)=>{
+      this.supportedCurrencies.push(currency)
+      this.supportedCurrenciesCodes.push(currency.code)
+    })
+
     this.exchangesService.getCurrencies()
       .subscribe(response => {
         this.currenciesResponse = response;
@@ -26,12 +36,15 @@ export class ConverterComponent implements OnInit {
         let i = 0
         for (let key in this.currenciesResponse){
           let currency = this.currenciesResponse[key].code;
-          this.currencies.push([currency,i])
-          i++
+          if (this.supportedCurrenciesCodes.includes(currency)){
+            let index = this.supportedCurrenciesCodes.indexOf(currency)
+            currency = this.supportedCurrencies[i]
+            this.currencies.push({currency:currency,id:i})
+            i++
+          }
         }
         this.convert() 
       })
-      console.log(this.currencies);
       
   }
 
@@ -40,8 +53,11 @@ export class ConverterComponent implements OnInit {
       this.amount = 0
     } 
 
-    let from = this.currencies[this.fromCurrency][0]
-    let to = this.currencies[this.toCurrency][0]
+    let from = this.currencies[this.fromCurrency].currency.code
+    let to = this.currencies[this.toCurrency].currency.code
+    
+    this.toCurrencySymbol = this.supportedCurrencies[this.supportedCurrenciesCodes.indexOf(to)].symbol
+
     if (this.fromCurrency != this.toCurrency){
       if (this.amount !== 0){
         this.exchangesService.getConverted(from,to,this.amount)

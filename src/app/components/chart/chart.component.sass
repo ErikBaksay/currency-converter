@@ -1,8 +1,24 @@
 #chartContainer
     display: block
+    width: 40vw
     max-width: 85vw
-    width: 340px
     border: 1px solid #CCC
     border-radius: 4px
     padding: 10px
     margin-top: 20px
+
+@media all and (min-width: 1024px) and (max-width: 1280px)
+    #chartContainer
+        width: 40vw
+
+@media all and (min-width: 768px) and (max-width: 1024px)
+    #chartContainer
+        width: 55vw
+
+@media all and (min-width: 480px) and (max-width: 768px)
+    #chartContainer
+        width: 70vw
+
+@media all and (max-width: 480px)
+    #chartContainer
+        width: 85vw

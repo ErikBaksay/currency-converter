@@ -7,4 +7,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'currency-converter';
+
+  ngOnInit(): void {    
+    
+    window.addEventListener('resize', this.appHeight)
+    this.appHeight()
+  }
+
+  appHeight() {
+    const doc = document.documentElement
+    doc.style.setProperty('--app-height', `${window.innerHeight}px`)
+  }
 }
+
