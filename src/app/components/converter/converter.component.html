@@ -1,19 +1,43 @@
 <div id="converter-container">
     
-    <select id="fromCurrency" [(ngModel)]="fromCurrency" (change)="convert()">
-        <option *ngFor="let currency of currencies" value="{{currency.id}}">{{currency.currency.fullName}} - {{currency.currency.code}}</option>
-    </select>
-    <input id="fromValue" type="number" [(ngModel)]='amount' (input)="convert()">
+    <input 
+        id="from-currency" 
+        list="currencies" 
+        [(ngModel)]="fromCurrency" 
+        (change)="convert()" 
+        (click)="emptyCurrencyInput(true)"
+        (focusout)="checkIfEmpty(true)">
 
-    <select id="toCurrency" [(ngModel)]="toCurrency" (change)="convert()">
-        <option *ngFor="let currency of currencies" value="{{currency.id}}">{{currency.currency.fullName}} - {{currency.currency.code}}</option>
-    </select>
+    <input 
+        id="fromValue" 
+        type="number" 
+        [(ngModel)]='amount' 
+        (input)="convert()">
+
+    <input 
+        id="to-currency" 
+        list="currencies" 
+        [(ngModel)]="toCurrency" 
+        (change)="convert()" 
+        (click)="emptyCurrencyInput(false)"
+        (focusout)="checkIfEmpty(false)">
+
+    <datalist id="currencies">
+        <option 
+            *ngFor="let currency of currencies" 
+            value="{{currency.currency.code}}">
+            {{currency.currency.fullName}}
+        </option>
+    </datalist>
+
     <div id="result-section">
         <p>{{conversionValue}} {{toCurrencySymbol}}</p>
     </div>
     <div id="switch-container">
         <div id="switch">
-            <span class="material-symbols-outlined" (click)="switchCurrencies()">
+            <span 
+                class="material-symbols-outlined" 
+                (click)="switchCurrencies()">
                 swap_vert
             </span>
         </div>

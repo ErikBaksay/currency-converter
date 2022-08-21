@@ -14,8 +14,10 @@ export class ConverterComponent implements OnInit {
   currencies : any = []
   conversionValue:any;
   amount = 1
-  fromCurrency = 0
-  toCurrency = 1
+  fromCurrency = 'USD'
+  previousFromCurrency = 'USD'
+  toCurrency = 'EUR'
+  previousToCurrency = 'EUR'
   supportedCurrencies : CurrencyFull[] = []
   supportedCurrenciesCodes : string[] = []
   toCurrencySymbol = ''
@@ -30,22 +32,21 @@ export class ConverterComponent implements OnInit {
     })
 
     this.exchangesService.getCurrencies()
-      .subscribe(response => {
-        this.currenciesResponse = response;
-        this.currenciesResponse = this.currenciesResponse.symbols
-        let i = 0
-        for (let key in this.currenciesResponse){
-          let currency = this.currenciesResponse[key].code;
-          if (this.supportedCurrenciesCodes.includes(currency)){
-            let index = this.supportedCurrenciesCodes.indexOf(currency)
-            currency = this.supportedCurrencies[i]
-            this.currencies.push({currency:currency,id:i})
-            i++
-          }
+    .subscribe(response => {
+      this.currenciesResponse = response;
+      this.currenciesResponse = this.currenciesResponse.symbols
+      let i = 0
+      for (let key in this.currenciesResponse){
+        let currency = this.currenciesResponse[key].code;
+        if (this.supportedCurrenciesCodes.includes(currency)){
+          let index = this.supportedCurrenciesCodes.indexOf(currency)
+          currency = this.supportedCurrencies[i]
+          this.currencies.push({currency:currency,id:i})
+          i++
         }
-        this.convert() 
-      })
-      
+      }
+      this.convert() 
+    })
   }
 
   convert(){
@@ -53,8 +54,14 @@ export class ConverterComponent implements OnInit {
       this.amount = 0
     } 
 
-    let from = this.currencies[this.fromCurrency].currency.code
-    let to = this.currencies[this.toCurrency].currency.code
+    console.log(this.supportedCurrencies);
+    
+
+    let from = this.fromCurrency
+    let to = this.toCurrency
+
+    console.log(from,to);
+    
     
     this.toCurrencySymbol = this.supportedCurrencies[this.supportedCurrenciesCodes.indexOf(to)].symbol
 
@@ -79,5 +86,26 @@ export class ConverterComponent implements OnInit {
     [this.fromCurrency, this.toCurrency] = [this.toCurrency, this.fromCurrency]
     this.convert()
   }
+
+  emptyCurrencyInput(isFrom : boolean){
+    if (isFrom){
+      this.previousFromCurrency = this.fromCurrency
+      this.fromCurrency = ''
+    } else {
+      this.previousToCurrency = this.toCurrency
+      this.toCurrency = ''
+    }
+  }
   
+  checkIfEmpty(isFrom : boolean){
+    if (isFrom){
+      if (this.fromCurrency == ''){
+        this.fromCurrency = this.previousFromCurrency
+      }
+    } else {
+      if (this.toCurrency == ''){
+        this.toCurrency = this.previousToCurrency
+      }
+    }
+  }
 }
