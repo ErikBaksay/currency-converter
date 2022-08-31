@@ -1,0 +1,81 @@
+#favorites-container
+    display: flex
+    border: 1px solid #CCC
+    border-radius: 4px
+    width: fit-content
+    height: fit-content
+    margin: 15px
+    margin-top: 15vh
+    #collapsable-favorites
+        width: fit-content
+        height: fit-content
+        border-radius: 4px
+        #collapsable-top-section-favorites
+            display: flex
+            flex-direction: row
+            justify-content: space-between
+            width: calc(40vw + 20px)
+            height: 100%
+            padding: 10px
+            background-color: #f0f0f0
+            border-radius: 4px
+        #collapsable-top-section-favorites:hover
+            cursor: pointer
+        #collapsable-bottom-section-favorites
+            display: none
+            width: calc(40vw + 20px)
+            li
+                list-style: none
+                width: 100%
+                padding: 10px
+                display: flex
+                flex-direction: row
+                justify-content: space-between
+                .favorite-options
+                    display: flex
+                    flex-direction: row
+                    justify-content: center
+                    align-items: center
+                    button
+                        padding: 5px
+                        margin-right: 12px
+                    .favorite-icon
+                        color: rgba(255,26,104,1)
+                    .favorite-icon:hover
+                        color: rgba(204,0,68,1)
+                        cursor: pointer
+
+@media all and (min-width: 1024px) and (max-width: 1280px)
+    #favorites-container
+        #collapsable-favorites
+            #collapsable-top-section-favorites
+                width: 40vw
+            #collapsable-bottom-section-favorites
+                width: 40vw
+
+@media all and (min-width: 768px) and (max-width: 1024px)
+    #favorites-container
+        margin-top: 2vh
+        #collapsable-favorites
+            #collapsable-top-section-favorites
+                width: 55vw
+            #collapsable-bottom-section-favorites
+                width: 55vw
+
+@media all and (min-width: 480px) and (max-width: 768px)
+    #favorites-container
+        margin-top: 2vh
+        #collapsable-favorites
+            #collapsable-top-section-favorites
+                width: 70vw
+            #collapsable-bottom-section-favorites
+                width: 70vw
+
+@media all and (max-width: 480px)
+    #favorites-container
+        margin-top: 2vh
+        #collapsable-favorites
+            #collapsable-top-section-favorites
+                width: 85vw
+            #collapsable-bottom-section-favorites
+                width: 85vw

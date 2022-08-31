@@ -8,13 +8,17 @@ import { AppComponent } from './app.component';
 import { ConverterComponent } from './components/converter/converter.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { ChartComponent } from './components/chart/chart.component';
+import { FavoritesComponent } from './components/favorites/favorites.component';
+import { RecentComponent } from './components/recent/recent.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ConverterComponent,
     MainPageComponent,
-    ChartComponent
+    ChartComponent,
+    FavoritesComponent,
+    RecentComponent
   ],
   imports: [
     BrowserModule,

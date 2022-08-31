@@ -10,6 +10,7 @@
     border-radius: 4px
     padding: 10px
     width: 40vw
+    margin: 15px
     select
         font-size: 22px
         border-radius: 4px
@@ -33,6 +34,8 @@
         padding: 6px
         border-radius: 4px
         border: 1px solid #CCC
+    #from-currency:hover
+        background: #e0e0e0
     #fromValue
         grid-area: fromValue
     #to-currency
@@ -41,6 +44,8 @@
         padding: 6px
         border-radius: 4px
         border: 1px solid #CCC
+    #to-currency:hover
+        background: #e0e0e0
     #result-section
         grid-area: result
         display: flex
@@ -61,13 +66,32 @@
         justify-content: center
         align-items: center
         #switch
+            display: flex
+            flex-direction: column
+            background: #f0f0f0
+            border-radius: 4px
             span
-                background: #f0f0f0
-                color: #333333
                 padding: 6px
-                border-radius: 4px
+            #favorite-toggle-converter
+                border-radius: 4px 4px 0px 0px
                 border: 1px solid #CCC
                 cursor: pointer
+                color: #ccc
+            #favorite-toggle-converter:hover
+                background: #e0e0e0
+                color: #999
+            #favorite-toggle-converter.is-favorite
+                color: rgba(255,26,104,1)
+            #favorite-toggle-converter.is-favorite:hover
+                background: #e0e0e0
+                color: rgba(204,0,68,1)
+            #switch-button
+                border-radius: 0px 0px 4px 4px
+                border: 1px solid #CCC
+                border-top: none
+                cursor: pointer
+            #switch-button:hover
+                background: #e0e0e0
 
 @media all and (min-width: 1024px) and (max-width: 1280px)
     #converter-container

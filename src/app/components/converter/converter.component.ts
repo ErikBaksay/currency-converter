@@ -1,3 +1,6 @@
+import { RecentConversionsService } from './../../services/recent-conversions.service';
+import { conversionInterface } from './../../interfaces/conversion';
+import { SavedConversionsService } from './../../services/saved-conversions.service';
 import { CurrencyFull } from './../../interfaces/currency-full';
 import { currencyFullNames } from './../../currency-full-names';
 import { ChartDataService } from './../../services/chart-data.service';
@@ -21,11 +24,28 @@ export class ConverterComponent implements OnInit {
   supportedCurrencies : CurrencyFull[] = []
   supportedCurrenciesCodes : string[] = []
   toCurrencySymbol = ''
+  favorites : conversionInterface[] = []
 
   constructor(private exchangesService:ExchangeRatesService,
-              private chartDataService : ChartDataService){}
+              private chartDataService : ChartDataService,
+              private savedConversionsService : SavedConversionsService,
+              private recentConversionsService : RecentConversionsService){}
 
   ngOnInit(): void {
+    this.savedConversionsService.favoritesChanged.subscribe(()=>{this.favoritesChanged()})
+    
+    this.savedConversionsService.favoriteSelected.subscribe((conversion)=>{
+      this.fromCurrency = conversion.from;
+      this.toCurrency = conversion.to;
+      this.convert()
+    })
+    this.recentConversionsService.recentSelected.subscribe((conversion)=>{
+      this.fromCurrency = conversion.from;
+      this.toCurrency = conversion.to;
+      this.convert()
+    })
+
+    this.favorites = this.savedConversionsService.getFavorites()
     currencyFullNames.forEach((currency)=>{
       this.supportedCurrencies.push(currency)
       this.supportedCurrenciesCodes.push(currency.code)
@@ -50,18 +70,13 @@ export class ConverterComponent implements OnInit {
   }
 
   convert(){
+
     if (this.amount == null){
       this.amount = 0
     } 
 
-    console.log(this.supportedCurrencies);
-    
-
     let from = this.fromCurrency
-    let to = this.toCurrency
-
-    console.log(from,to);
-    
+    let to = this.toCurrency 
     
     this.toCurrencySymbol = this.supportedCurrencies[this.supportedCurrenciesCodes.indexOf(to)].symbol
 
@@ -80,11 +95,20 @@ export class ConverterComponent implements OnInit {
       this.conversionValue = this.amount;
     }
     this.chartDataService.currencySelectionChanged(from,to)
+    this.recentConversionsService.addRecent(from,to,this.supportedCurrenciesCodes)
   }
   
   switchCurrencies(){
     [this.fromCurrency, this.toCurrency] = [this.toCurrency, this.fromCurrency]
     this.convert()
+  }
+
+  isFavorite(from:string,to:string,returnID:boolean){
+    return this.savedConversionsService.isFavorite(from,to,returnID)
+  }
+
+  favoriteToggle(){    
+    this.savedConversionsService.favoriteToggle(this.fromCurrency,this.toCurrency)
   }
 
   emptyCurrencyInput(isFrom : boolean){
@@ -107,5 +131,9 @@ export class ConverterComponent implements OnInit {
         this.toCurrency = this.previousToCurrency
       }
     }
+  }
+
+  favoritesChanged(){
+    this.favorites = this.savedConversionsService.getFavorites()
   }
 }

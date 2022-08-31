@@ -43,7 +43,7 @@ export class ChartComponent implements OnInit {
   constructChart(){
     this.chartLabels = []
     this.chartData = []
-
+    
     this.chartDataService.getChartData(this.monthAgoDate,this.currentDate)
     .subscribe(response=>{
     this.chartData = response;

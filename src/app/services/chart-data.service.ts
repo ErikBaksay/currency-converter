@@ -33,13 +33,13 @@ export class ChartDataService {
     //fromCopy[1] += 1 
     //toCopy[1] += 1
     if (String(fromCopy[1]).length == 1){
-      fromCopy[1] = '0'+String(fromCopy[1])
+      fromCopy[1] = '0'+String(fromCopy[1]+1)
     }
     if (String(fromCopy[2]).length == 1){
       fromCopy[2] = '0'+String(fromCopy[2])
     }
     if (String(toCopy[1]).length == 1){
-      toCopy[1] = '0'+String(toCopy[1])
+      toCopy[1] = '0'+String(toCopy[1]+1)
     }
     if (String(toCopy[2]).length == 1){
       toCopy[2] = '0'+String(toCopy[2])

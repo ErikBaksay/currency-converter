@@ -1,0 +1,29 @@
+<div id="favorites-container">
+    <div id="collapsable-favorites">
+        <div
+            id="collapsable-top-section-favorites"
+            (click)="collapsableToggle()">
+            <h4>Favorites</h4>
+            <span class="material-symbols-outlined">
+                expand_more
+            </span>
+        </div>
+        <div id="collapsable-bottom-section-favorites">
+            <ul>
+                <li *ngFor="let favorite of favorites">
+                    <div>{{favorite.from}} - {{favorite.to}}</div>
+                    <div class="favorite-options">
+                        <button (click)="selected(favorite.from,favorite.to)">
+                            Select
+                        </button>
+                        <span 
+                            class="material-symbols-outlined favorite-icon"
+                            (click)="favoriteToggle(favorite.from,favorite.to)">
+                            favorite
+                        </span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

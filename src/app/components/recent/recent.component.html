@@ -1,0 +1,24 @@
+<div id="recent-container">
+    <div id="collapsable-recent">
+        <div 
+            id="collapsable-top-section-recent"
+            (click)="collapsableToggle()">
+            <h4>Recent</h4>
+            <span class="material-symbols-outlined">
+                expand_more
+            </span>
+        </div>
+        <div id="collapsable-bottom-section-recent">
+            <ul>
+                <li *ngFor="let recent of recents">
+                    <div>{{recent.from}} - {{recent.to}}</div>
+                    <div class="recent-option">
+                        <button (click)="selected(recent.from,recent.to)">
+                            Select
+                        </button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

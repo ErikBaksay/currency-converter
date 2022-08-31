@@ -36,7 +36,15 @@
     <div id="switch-container">
         <div id="switch">
             <span 
+                class="material-symbols-outlined favorite-icon" 
+                id="favorite-toggle-converter"
+                (click)="favoriteToggle()"
+                [class.is-favorite]="isFavorite(fromCurrency,toCurrency,false)">
+                favorite
+            </span>
+            <span 
                 class="material-symbols-outlined" 
+                id="switch-button"
                 (click)="switchCurrencies()">
                 swap_vert
             </span>

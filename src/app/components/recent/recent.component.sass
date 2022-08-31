@@ -1,0 +1,71 @@
+#recent-container
+    display: flex
+    border: 1px solid #CCC
+    border-radius: 4px
+    width: fit-content
+    height: fit-content
+    margin: 15px
+    #collapsable-recent
+        width: fit-content
+        height: fit-content
+        border-radius: 4px
+        #collapsable-top-section-recent
+            display: flex
+            flex-direction: row
+            justify-content: space-between
+            width: calc(40vw + 20px)
+            height: 100%
+            padding: 10px
+            background-color: #f0f0f0
+            border-radius: 4px
+        #collapsable-top-section-recent:hover
+            cursor: pointer
+        #collapsable-bottom-section-recent
+            display: none
+            li
+                list-style: none
+                width: 100%
+                padding: 10px
+                display: flex
+                flex-direction: row
+                justify-content: space-between
+                .recent-option
+                    display: flex
+                    flex-direction: row
+                    justify-content: center
+                    align-items: center
+                    button
+                        padding: 5px
+                        margin-right: 12px
+
+@media all and (min-width: 1024px) and (max-width: 1280px)
+    #recent-container
+        #collapsable-recent
+            #collapsable-top-section-recent
+                width: 40vw
+            #collapsable-bottom-section-recent
+                width: 40vw
+
+@media all and (min-width: 768px) and (max-width: 1024px)
+    #recent-container
+        #collapsable-recent
+            #collapsable-top-section-recent
+                width: 55vw
+            #collapsable-bottom-section-recent
+                width: 55vw
+
+@media all and (min-width: 480px) and (max-width: 768px)
+    #recent-container
+        #collapsable-recent
+            #collapsable-top-section-recent
+                width: 70vw
+            #collapsable-bottom-section-recent
+                width: 70vw
+
+@media all and (max-width: 480px)
+    #recent-container
+        #collapsable-recent
+            #collapsable-top-section-recent
+                width: 85vw
+            #collapsable-bottom-section-recent
+                width: 85vw
