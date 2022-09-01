@@ -8,7 +8,7 @@
                 expand_more
             </span>
         </div>
-        <div id="collapsable-bottom-section-recent">
+        <div id="collapsable-bottom-section-recent" [@collapseRecents]="recentsHidden">
             <ul>
                 <li *ngFor="let recent of recents">
                     <div>{{recent.from}} - {{recent.to}}</div>

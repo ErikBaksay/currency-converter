@@ -8,7 +8,7 @@
                 expand_more
             </span>
         </div>
-        <div id="collapsable-bottom-section-favorites">
+        <div id="collapsable-bottom-section-favorites" [@collapseFavorite]="favoritesHidden">
             <ul>
                 <li *ngFor="let favorite of favorites">
                     <div>{{favorite.from}} - {{favorite.to}}</div>

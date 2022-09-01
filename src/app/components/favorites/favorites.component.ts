@@ -1,16 +1,33 @@
 import { SavedConversionsService } from './../../services/saved-conversions.service';
 import { Component, OnInit } from '@angular/core';
 import { conversionInterface } from 'src/app/interfaces/conversion';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-favorites',
   templateUrl: './favorites.component.html',
-  styleUrls: ['./favorites.component.sass']
+  styleUrls: ['./favorites.component.sass'],
+  animations: [
+  trigger('collapseFavorite', [
+    state('true',style({
+      transform: 'translateY(-100px)',
+      opacity: 0,
+      height: 0,
+    })),
+    state('false',style({
+      transform: 'translateY(0px)',
+      opacity: 1,
+      height: '*',
+    })),
+    transition('true => false',animate('0.1s ease-in')),
+    transition('false => true',animate('0.1s ease-out'))
+  ])]
 })
 export class FavoritesComponent implements OnInit {
 
   collapsable : any
   favorites : conversionInterface[] = []
+  favoritesHidden = true
 
   constructor(private savedConversionsService : SavedConversionsService) { }
 
@@ -25,8 +42,11 @@ export class FavoritesComponent implements OnInit {
   collapsableToggle(){
     if ( this.collapsable!.style.display == 'none'){
       this.collapsable!.style.display = 'block'
+      this.favoritesHidden = false
     } else {
-      this.collapsable!.style.display = 'none'
+      this.favoritesHidden = true
+      setTimeout(()=>{this.collapsable!.style.display = 'none'},100)
+      
     } 
   }
 
