@@ -4,8 +4,11 @@
             id="collapsable-top-section-favorites"
             (click)="collapsableToggle()">
             <h4>Favorites</h4>
-            <span class="material-symbols-outlined">
+            <span *ngIf="favoritesHidden" class="material-symbols-outlined">
                 expand_more
+            </span>
+            <span *ngIf="!favoritesHidden" class="material-symbols-outlined">
+                expand_less
             </span>
         </div>
         <div id="collapsable-bottom-section-favorites" [@collapseFavorite]="favoritesHidden">
@@ -23,6 +26,7 @@
                         </span>
                     </div>
                 </li>
+                <li *ngIf="favorites.length == 0">You have no favorites</li>
             </ul>
         </div>
     </div>

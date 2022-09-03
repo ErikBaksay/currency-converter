@@ -4,8 +4,11 @@
             id="collapsable-top-section-recent"
             (click)="collapsableToggle()">
             <h4>Recent</h4>
-            <span class="material-symbols-outlined">
+            <span *ngIf="recentsHidden" class="material-symbols-outlined">
                 expand_more
+            </span>
+            <span *ngIf="!recentsHidden" class="material-symbols-outlined">
+                expand_less
             </span>
         </div>
         <div id="collapsable-bottom-section-recent" [@collapseRecents]="recentsHidden">
@@ -18,6 +21,7 @@
                         </button>
                     </div>
                 </li>
+                <li *ngIf="recents.length == 0">You have no recent conversions</li>
             </ul>
         </div>
     </div>

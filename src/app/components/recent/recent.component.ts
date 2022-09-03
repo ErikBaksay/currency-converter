@@ -11,14 +11,10 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   animations: [
     trigger('collapseRecents', [
       state('true',style({
-        transform: 'translateY(-100px)',
-        opacity: 0,
         height: 0,
       })),
       state('false',style({
-        transform: 'translateY(0px)',
-        opacity: 1,
-        height: '*',
+
       })),
       transition('true => false',animate('0.1s ease-in')),
       transition('false => true',animate('0.1s ease-out'))
